@@ -1,0 +1,87 @@
+﻿@model VMProjectPhotosUI
+@{
+    ViewData["Title"] = "ProjectDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@model Projects*@
+<!-- Start Page Title -->
+<div class="page-title-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                @if (ViewBag.lang == "az")
+                {
+                    <h2>Detallı</h2>
+                }
+                else if (ViewBag.lang == "ru")
+                {
+                    <h2>Подробности</h2>
+                }
+                else
+                {
+                    <h2>Details</h2>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape3"><img src="~/User/assets/img/shape3.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape5"><img src="~/User/assets/img/shape5.png" alt="shape"></div>
+    <div class="shape6 rotateme"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+</div>
+<!-- End Page Title -->
+<!-- Start Project Details Area -->
+<section class="project-details-area ptb-80">
+    <div class="container">
+        <div class="row">
+            @foreach (var projectPhoto in Model.ProjectPhotos)
+            {
+                <div class="col-lg-6 col-md-6">
+                    <div class="project-details-image">
+                        <img src="~/images/Projects/@projectPhoto.Photo" alt="work">
+                        <a href="~/images/Projects/@projectPhoto.Photo" class="popup-btn"><i data-feather="plus"></i></a>
+                    </div>
+                </div>
+
+            }
+            <div class="col-lg-12 col-md-12">
+                <div class="project-details-desc">
+                    <h3>
+                        @if (ViewBag.lang == "az")
+                        {
+                            @Model.Project.LittleContent_Az
+                        }
+                        else if (ViewBag.lang == "ru")
+                        {
+                            @Model.Project.LittleContent_Ru
+                        }
+                        else
+                        {
+                            @Model.Project.LittleContent
+                        }
+                    </h3>
+
+                    <p>
+                        @if (ViewBag.lang == "az")
+                        {
+                            @Model.Project.Description_Az
+                        }
+                        else if (ViewBag.lang == "ru")
+                        {
+                            @Model.Project.Description_Ru
+                        }
+                        else
+                        {
+                            @Model.Project.Description
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

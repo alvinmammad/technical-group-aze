@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Products>
+
+@foreach (var product in Model)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="single-products">
+            <div class="products-image">
+                <img src="~/images/Products/@(product.ProductPhotos.FirstOrDefault()!=null?product.ProductPhotos.FirstOrDefault().Photo:"")" alt="@product.Name">
+            </div>
+
+            <div class="products-content">
+                <h3><a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ID">@product.Name</a></h3>
+                @if (product.Discount > 0)
+                {
+                    <span style="text-decoration:line-through;color:#6084a4">₼@product.Price</span>
+                    <span style="font-weight:bolder">₼@(product.Price - (product.Price * product.Discount) / 100)</span>
+
+                }
+                else
+                {
+                    <span style="font-weight:bolder">₼@product.Price</span>
+
+                }
+
+                @if (ViewBag.lang == "az")
+                {
+                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ID" class="add-to-cart-btn">Ətraflı</a>
+                }
+
+                else if (ViewBag.lang == "ru")
+                {
+                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ID" class="add-to-cart-btn">Подробнее</a>
+                }
+                else
+                {
+                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@product.ID" class="add-to-cart-btn">More Details</a>
+                }
+
+            </div>
+            @if (product.Discount > 0)
+            {
+                <div class="sale-btn">
+                    Sale
+                </div>
+            }
+
+        </div>
+    </div>
+
+}
+

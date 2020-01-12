@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@model VMAbout
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Page Title -->
+<div class="page-title-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h2>@Localizer["aboutus"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape3"><img src="~/User/assets/img/shape3.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape5"><img src="~/User/assets/img/shape5.png" alt="shape"></div>
+    <div class="shape6 rotateme"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+</div>
+<!-- End Page Title -->
+<!-- Start About Area -->
+<section class="about-area ptb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="about-image">
+                    <img src="~/images/Statics/aboutbanner.png" alt="image">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <div class="about-content">
+                    <div class="section-title">
+                        <h2>@Localizer["aboutus"]</h2>
+                        <div class="bar"></div>
+                        <p>
+                            @if (ViewBag.lang == "az")
+                            {
+                                @Model.Setting.AboutDesc_Az
+                            }
+                            else if (ViewBag.lang == "ru")
+                            {
+                                @Model.Setting.AboutDesc_Ru
+                            }
+                            else
+                            {
+                                @Model.Setting.AboutDesc
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-inner-area">
+            <div class="row">
+                @foreach (var aboutItem in Model.AboutItems)
+                {
+                    <div class="col-lg-4 col-md-6" style="margin-bottom:30px !important;">
+                        <div class="about-text">
+                            <h3>
+                            @if (ViewBag.lang=="az")
+                            {
+                                @aboutItem.Title_Az
+                            }
+                            else if (ViewBag.lang=="ru")
+                            {
+                                @aboutItem.Title_Ru
+                            }
+                            else
+                            {
+                                @aboutItem.Title
+                            }
+                            </h3>
+
+                            <p>
+                                @if (ViewBag.lang == "az")
+                                {
+                                    @aboutItem.Content_Az
+                                }
+                                else if (ViewBag.lang == "ru")
+                                {
+                                    @aboutItem.Content_Ru
+                                }
+                                else
+                                {
+                                    @aboutItem.Content
+                                }
+                            </p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ready-to-talk">
+    <div class="container">
+        <h3>@Localizer["readytotalk"]</h3>
+        <p>@Localizer["readytotalkdesc"]</p>
+        <a href="#" class="btn btn-primary">@Localizer["contactus"]</a>
+    </div>
+</section>
+
+<section class="funfacts-area ptb-80">
+    <div class="container">
+        <div class="section-title">
+            <h2>@Localizer["factstitle"]</h2>
+            <div class="bar"></div>
+        </div>
+
+        <div class="row">
+            @foreach (var fact in Model.Facts)
+            {
+                <div class="col-lg-3 col-md-3 col-6">
+                    <div class="funfact">
+                        <h3><span class="odometer" data-count="@fact.Key">00</span></h3>
+                        <p>
+                        @if (ViewBag.lang=="az")
+                        {
+                            @fact.Value_Az
+                        }
+                        else if (ViewBag.lang=="ru")
+                        {
+                            @fact.Value_Ru
+                        }
+                        else
+                        {
+                            @fact.Value
+                        }
+                        </p>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+</section>
+<!-- End Fun Facts Area -->

@@ -1,0 +1,49 @@
+﻿@model TechnicalGroup.Areas.TechnicalGroupAdmin.Models.AdminVM.VMProjectPhotos
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+<div id="kt_content" class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background:white !important">
+    <h3 class="text-center text-danger">Proyektlər haqqında detallı</h3>
+    <hr />
+    <div class="container-fluid">
+        <div class="col-12 image-col">
+            <h3><b>Proyektin şəkli :</b></h3>
+            <ul class="d-flex multi-image-ul">
+
+                @foreach (var photos in Model.Photos)
+                {
+                    <li class="multi-image-li">
+                        <img class="img-thumbnail img-shadow multi-image-img" src="~/images/Projects/@(photos.Photo)" style="width:250px" />
+
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (AZE)</b> - @Model.Project.LittleContent_Az</p>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (RUS)</b> - @Model.Project.LittleContent_Ru</p>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (ENG)</b> - @Model.Project.LittleContent</p>
+        </div>
+        <div class="col-12">
+            <p><b>Ətraflı (AZE)</b> - @Html.Raw(Model.Project.Description_Az)</p>
+        </div>
+        <div class="col-12">
+            <p><b>Ətraflı (RUS)</b> - @Html.Raw(Model.Project.Description_Ru)</p>
+        </div>
+        <div class="col-12">
+            <p><b>Ətraflı (ENG)</b> - @Html.Raw(Model.Project.Description)</p>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="col-12">
+    <a asp-action="Index" class="btn btn-primary btn-block btn-lg" style="margin: 30px 0;">
+        <i class="fas fa-long-arrow-alt-left"></i> Geriyə qayıt
+    </a>
+</div>

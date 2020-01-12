@@ -1,0 +1,173 @@
+﻿@model IEnumerable<TechnicalGroup.Models.Products>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .sorting {
+        font-weight: 600 !important;
+    }
+</style>
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <hr />
+        <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-information"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        Məhsullar
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            &nbsp;
+                            <a asp-action="Add" asp-controller="Products" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                Yarat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <!--begin: Datatable -->
+                <div id="kt_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer" style="overflow:auto;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline collapsed" id="kt_table_1" role="grid" aria-describedby="kt_table_1_info" style="width: 982px;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 38.25px;" aria-sort="descending" aria-label="Order ID: activate to sort column ascending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 58.25px;" aria-label="Country: activate to sort column ascending">Məhsulun adı</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 72.25px;" aria-label="Ship City: activate to sort column ascending">Məhsulun şəkli</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 90.25px;" aria-label="Ship Address: activate to sort column ascending">Məhsulun qiyməti(endirimsiz)</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 110.25px;" aria-label="Company Name: activate to sort column ascending">Məhsulun endirim faizi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Məhsulun aktivliyi</th>
+                                        @*<th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Qısa məlumat (AZE)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Qısa məlumat (RUS)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Qısa məlumat (ENG)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Məhsul haqqında ətraflı (AZE)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Məhsul haqqında ətraflı (RUS)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Məhsul haqqında ətraflı (ENG)</th>*@
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 39.25px;" aria-label="Ship Date: activate to sort column ascending">Detallı / Sil</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model)
+                                    {
+                                        <tr role="row" class="odd admintr">
+                                            <td>@product.ID</td>
+                                            <td>@product.Name</td>
+                                            <td>
+                                                <img src="~/images/Products/@(product.ProductPhotos.FirstOrDefault()!=null?product.ProductPhotos.FirstOrDefault().Photo:"")" alt="@product.Name" style="width:150px;height:auto;object-fit:contain" />
+                                            </td>
+                                            <td>@product.Price ₼</td>
+
+                                            @if (product.Discount > 0)
+                                            {
+                                                <td>
+                                                    @product.Discount %
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    Yoxdur
+                                                </td>
+                                            }
+                                            @if (product.IsActive)
+                                            {
+                                                <td>
+                                                    Aktivdir
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    Aktiv deyil
+                                                </td>
+                                            }
+
+                                            @*@if (product.Info_Az.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Info_Az.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Info_Az)</td>
+                                                }
+                                                @if (product.Info_Ru.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Info_Ru.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Info_Ru)</td>
+                                                }
+                                                @if (product.Info.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Info.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Info)</td>
+                                                }
+
+                                                @if (product.Description_Az.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Description_Az.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Description_Az)</td>
+                                                }
+                                                @if (product.Description_Ru.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Description_Ru.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Description_Ru)</td>
+                                                }
+                                                @if (product.Description.Length > 94)
+                                                {
+                                                    <td>@Html.Raw(product.Description.Substring(0, 94))...</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.Raw(product.Description)</td>
+                                                }*@
+
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@product.ID" class="alert alert-success">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@product.ID" class="alert alert-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+    <!-- end:: Content -->
+</div>
+

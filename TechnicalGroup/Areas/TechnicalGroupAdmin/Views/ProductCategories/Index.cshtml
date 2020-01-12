@@ -1,0 +1,83 @@
+﻿@model IEnumerable<TechnicalGroup.Models.ProductCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+       
+       
+        <hr />
+        <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="fa fa-list-ol"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        Məhsulların kateqoriyaları
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            &nbsp;
+                            <a asp-action="Create" asp-controller="ProductCategories" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                Yarat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <!--begin: Datatable -->
+                <div id="kt_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline collapsed" id="kt_table_1" role="grid" aria-describedby="kt_table_1_info" style="width: 982px;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 38.25px;" aria-sort="descending" aria-label="Order ID: activate to sort column ascending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 58.25px;" aria-label="Country: activate to sort column ascending">Kateqoriya adı(AZE)</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 72.25px;" aria-label="Ship City: activate to sort column ascending">Kateqoriya adı(RUS)</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 90.25px;" aria-label="Ship Address: activate to sort column ascending">Kateqoriya adı(ENG)</th>
+                                        <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1" style="width: 75.25px;" aria-label="Company Agent: activate to sort column ascending">Dəyiş/Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var category in Model)
+                                    {
+                                    <tr role="row" class="odd admintr">
+                                        <td>@category.ID</td>
+                                        <td>@category.CategoryName_Az</td>
+                                        <td>@category.CategoryName_Ru</td>
+                                        <td>@category.CategoryName</td>
+
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@category.ID" class="alert alert-info" alt="Dəyişdir">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@category.ID" class="alert alert-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!--end: Datatable -->
+            </div>
+        </div>
+    </div>
+    <!-- end:: Content -->
+</div>

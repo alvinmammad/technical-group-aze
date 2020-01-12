@@ -1,0 +1,113 @@
+﻿@model IEnumerable<TechnicalGroup.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .sorting {
+        font-weight: 600 !important;
+    }
+</style>
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <hr />
+        <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="fa fa-cog"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        Xəbərlər bölməsi
+                    </h3>
+                </div>
+
+            </div>
+            <div class="kt-portlet__body" style="overflow-x:scroll">
+                <div id="kt_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive-">
+                                <table class="table table-striped table-bordered table-hover table-checkable dataTable no-footer dtr-inline collapsed" id="kt_table_1" role="grid" aria-describedby="kt_table_1_info" style="width: 982px;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Xəbər şəkli</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Başlıq (AZE)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Başlıq (RUS)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Başlıq (ENG)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Xəbər mətni (AZE)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Xəbər mətni (RUS)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Xəbər mətni (ENG)</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Yaranma tarixi</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Yazar ad soyadı</th>
+                                            <th class="sorting" tabindex="0" aria-controls="kt_table_1" rowspan="1" colspan="1">Dəyiş/Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var post in Model)
+                                         {
+                                        <tr role="row" class="odd admintr">
+                                            <td>@post.ID</td>
+                                            <td>
+                                                <img src="~/images/@post.Image" alt="Alternate Text" style="width:150px;" />
+                                            </td>
+                                            <td>@post.Title_Az</td>
+                                            <td>@post.Title_Ru</td>
+                                            <td>@post.Title</td>
+                                            @if (post.Text_Az.Length > 94)
+                                            {
+                                                <td>@Html.Raw(post.Text_Az.Substring(0, 94))...</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.Raw(post.Text_Az)</td>
+                                            }
+                                            @if (post.Text_Ru.Length > 94)
+                                            {
+                                                <td>@Html.Raw(post.Text_Ru.Substring(0, 94))...</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.Raw(post.Text_Ru)</td>
+                                            }
+                                            @if (post.Text.Length > 94)
+                                            {
+                                                <td>@Html.Raw(post.Text.Substring(0, 94))...</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.Raw(post.Text)</td>
+                                            }
+
+                                            <td>@post.CreatedDate.ToString("MMMM dd, yyyy")</td>
+                                            <td>@post.PostWriter.Fullname</td>
+                                            @*<td>@post.InstagramURL</td>*@
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@post.ID" class="alert alert-info" alt="Dəyişdir">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@post.ID" class="alert alert-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                         }
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

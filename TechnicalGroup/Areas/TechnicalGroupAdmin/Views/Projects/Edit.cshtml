@@ -1,0 +1,57 @@
+﻿@model TechnicalGroup.Models.Projects
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Projects</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="LittleContent" class="control-label"></label>
+                <input asp-for="LittleContent" class="form-control" />
+                <span asp-validation-for="LittleContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LittleContent_Ru" class="control-label"></label>
+                <input asp-for="LittleContent_Ru" class="form-control" />
+                <span asp-validation-for="LittleContent_Ru" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LittleContent_Az" class="control-label"></label>
+                <input asp-for="LittleContent_Az" class="form-control" />
+                <span asp-validation-for="LittleContent_Az" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description_Ru" class="control-label"></label>
+                <input asp-for="Description_Ru" class="form-control" />
+                <span asp-validation-for="Description_Ru" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description_Az" class="control-label"></label>
+                <input asp-for="Description_Az" class="form-control" />
+                <span asp-validation-for="Description_Az" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

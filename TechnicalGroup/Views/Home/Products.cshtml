@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@model VMProducts
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Page Title -->
+<div class="page-title-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h2>@Localizer["products"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape3"><img src="~/User/assets/img/shape3.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape5"><img src="~/User/assets/img/shape5.png" alt="shape"></div>
+    <div class="shape6 rotateme"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+</div>
+<!-- End Page Title -->
+<!-- Start Shop Area -->
+<input type="hidden" id="productCount" value="@ViewBag.TotalCountProducts" />
+
+<section class="shop-area ptb-80">
+    <div class="container">
+        <div class="woocommerce-topbar">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="woocommerce-topbar-ordering">
+                        <select class="form-control" id="selectCategory">
+                            <option>@Localizer["bycategories"]</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.ID">
+                                    @if (ViewBag.lang == "az")
+                                    {
+                                        @category.CategoryName_Az
+                                    }
+                                    else if (ViewBag.lang == "ru")
+                                    {
+                                        @category.CategoryName_Ru
+                                    }
+                                    else
+                                    {
+                                        @category.CategoryName
+                                    }
+                                </option>
+                            }
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6"></div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="woocommerce-topbar-ordering">
+                        <select class="form-control" id="selectFilter">
+                            <option>@Localizer["bysortingfilter"]</option>
+                            <option value="name">Məhsulun adına görə :</option>
+                            <option value="cheap">Məhsulun qiymətinə görə(ucuzdan bahaya) :</option>
+                            <option value="expensive">Məhsulun qiymətinə görə(bahadan ucuza) :</option>
+                            <option value="discount">Məhsulun endiriminə görə :</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row productsRow">
+            <partial name="_ProductsPartial" model="Model.Products" />
+            @if (ViewBag.TotalCountProducts > 4)
+            {
+                <button id="load_more_products" class="btn btn-outline-primary w-50 mx-auto my-5" style="">Load more</button>
+            }
+
+        </div>
+    </div>
+</section>
+<!-- End Shop Area -->

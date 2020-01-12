@@ -1,0 +1,77 @@
+﻿@model TechnicalGroup.Models.Products
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div id="kt_content" class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background:white !important">
+        <h3 class="text-center text-danger">Silmək istədiyinizdən əminsiniz mi ?</h3>
+        <hr />
+        <div class="container-fluid">
+            <div class="col-12 image-col">
+                <ul class="image-ul">
+                    <li>
+                        <b>Məhsulun şəkli :</b>
+                    </li>
+                    <li>
+                        <img class="img-thumbnail img-shadow" src="~/images/Products/@(Model.ProductPhotos.FirstOrDefault()!=null?Model.ProductPhotos.FirstOrDefault().Photo:"")" style="width:250px" />
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsulun adı</b> - @Model.Name</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsulun qiyməti</b> - @Model.Price ₼</p>
+            </div>
+            @if (Model.Discount > 0)
+            {
+                <div class="col-12">
+                    <p><b>Məhsulun endirimi</b> - @Model.Discount %</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <p><b>Məhsulun endirimi</b> - Yoxdur</p>
+                </div>
+            }
+            @if (!Model.IsActive)
+            {
+                <div class="col-12">
+                    <p><b>Məhsulun aktivliyi</b> - Aktivdir</p>
+                </div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <p><b>Məhsulun endirimi</b> - Aktiv deyil</p>
+                </div>
+            }
+
+            <div class="col-12">
+                <p><b>Məhsul haqqında qısa məlumat(AZE)</b> - @Model.Info_Az</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsul haqqında qısa məlumat(RUS)</b> - @Model.Info_Ru</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsul haqqında qısa məlumat(ENG)</b> - @Model.Info</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsul haqqında ətraflı(AZE)</b> - @Html.Raw(Model.Description_Az)</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsul haqqında ətraflı(RUS)</b> - @Html.Raw(Model.Description_Ru)</p>
+            </div>
+            <div class="col-12">
+                <p><b>Məhsul haqqında ətraflı(ENG)</b> -@Html.Raw(Model.Description)</p>
+            </div>
+        </div>
+        <hr />
+    </div>
+<form asp-action="Delete" class="text-center">
+    <input type="hidden" asp-for="ID" />
+    <input type="submit" value="Sil" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-primary">Geriyə qayıt</a>
+</form>

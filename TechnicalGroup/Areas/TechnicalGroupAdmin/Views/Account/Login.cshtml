@@ -1,0 +1,89 @@
+﻿@model TechnicalGroup.ViewModels.VMLogin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="utf-8" />
+
+    <title>Panelə giriş</title>
+    <meta name="description" content="Login page example">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="~/TechnicalGroupAdmin/assets/css/login-3.css" rel="stylesheet" type="text/css" />
+    <link href="~/TechnicalGroupAdmin/assets/vendors/global/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/TechnicalGroupAdmin/assets/css/demo1/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/TechnicalGroupAdmin/assets/css/demo1/skins/header/base/light.css" rel="stylesheet" />
+    <link href="~/TechnicalGroupAdmin/assets/css/demo1/skins/header/menu/light.css" rel="stylesheet" />
+    <link href="~/TechnicalGroupAdmin/assets/css/demo1/skins/brand/dark.css" rel="stylesheet" />
+    <link href="~/TechnicalGroupAdmin/assets/css/demo1/skins/aside/dark.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/images/Statics/sitelogo.jpeg" />
+</head>
+
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading">
+    <div class="kt-grid kt-grid--ver kt-grid--root">
+        <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v3 kt-login--signin" id="kt_login">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="login-bg">
+                <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                    <div class="kt-login__container">
+                        <div class="kt-login__logo">
+                            <a href="#">
+                                <img src="~/images/Statics/sitelogo.jpeg" style="width:50%">
+                            </a>
+                        </div>
+                        <div class="kt-login__signin">
+                            <div class="kt-login__head">
+                                <h3 class="kt-login__title">Panelə giriş</h3>
+                            </div>
+                            <form class="kt-form" asp-controller="Account" asp-action="Login" method="post">
+                               
+                                <br />
+                                <div class="text-danger" style="font-weight:bold">@ViewData["message"]</div>
+                                <div class="input-group">
+                                    <input asp-for="UserName" class="form-control" placeholder="İstifadəçi adı" autocomplete="off">
+                                </div>
+                               
+                                <div class="input-group">
+                                    <input asp-for="Password" class="form-control" placeholder="Şifrə" name="password">
+                                </div>
+                                <div class="row kt-login__extra">
+                                    <div class="col">
+                                        <label class="kt-checkbox">
+                                            <input asp-for="RememberMe"> Yadda saxla
+                                            <span></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="kt-login__actions">
+                                    <button id="kt_login_signin_submit" type="submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Daxil ol</button>
+                                </div>
+
+                            </form>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var KTAppOptions = { "colors": { "state": { "brand": "#5d78ff", "dark": "#282a3c", "light": "#ffffff", "primary": "#5867dd", "success": "#34bfa3", "info": "#36a3f7", "warning": "#ffb822", "danger": "#fd3995" }, "base": { "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"], "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"] } } };
+    </script>
+
+
+    <script src="~/TechnicalGroupAdmin/assets/vendors/global/vendors.bundle.js"></script>
+
+
+    <script src="~/TechnicalGroupAdmin/assets/js/demo1/scripts.bundle.js"></script>
+
+</body>
+
+</html>

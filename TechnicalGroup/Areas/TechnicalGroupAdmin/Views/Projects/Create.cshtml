@@ -1,0 +1,119 @@
+﻿@model TechnicalGroup.Models.Projects
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon">
+                            <i class="kt-font-brand flaticon2-information"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-title">
+                            Gördüyümüz işlər
+                        </h3>
+                    </div>
+                </div>
+                <form asp-action="Create" asp-controller="Projects" class="kt-form kt-form--label-right" id="kt_form_1 form-product" novalidate="novalidate" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="kt-portlet__body">
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Qısa məzmun (AZE):</label>
+                            <div class="col-9">
+                                <input asp-for="LittleContent_Az" class="form-control" placeholder="Qısa məzmun (Azərbaycan dilində)">
+                                <span asp-validation-for="LittleContent_Az" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-3 col-form-label">Qısa məzmun (RUS):</label>
+                            <div class="col-9">
+                                <input asp-for="LittleContent_Ru" class="form-control" placeholder="Qısa məzmun (rus dilində)">
+                                <span asp-validation-for="LittleContent_Ru" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Qısa məzmun (ENG):</label>
+                            <div class="col-9">
+                                <input asp-for="LittleContent" class="form-control" placeholder="Qısa məzmun (ingilis dilində)">
+                                <span asp-validation-for="LittleContent" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Ətraflı məlumat (AZE):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description_Az" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description_Az" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Ətraflı məlumat (RUS):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description_Ru" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description_Ru" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Ətraflı məlumat (ENG)</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Proyektin şəkli:</label>
+                            <div class="col-9">
+                                <div class="custom-file">
+                                    <input class="form-control" multiple type="file" id="PhotoProject" required name="Photo" value="" />
+                                    <span asp-validation-for="PhotoNames" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <select name="ProjectsPhotoNames" multiple style="display:none;">
+                        </select>
+
+                        <div class="form-group row">
+                            <ul class="d-flex photosProject">
+                            </ul>
+                        </div>
+
+                        <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg kt-separator--portlet-fit"></div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-5"></div>
+                                <div class="col-lg-7">
+                                    <button type="submit" class="btn btn-brand" id="btn-create-product">Yarat</button>
+                                    <button type="reset" class="btn btn-secondary">Ləğv elə</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description_Az'));
+        ClassicEditor
+            .create(document.querySelector('#Description_Ru'))
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+}

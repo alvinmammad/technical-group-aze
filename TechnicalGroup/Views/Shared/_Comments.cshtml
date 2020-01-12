@@ -1,0 +1,115 @@
+﻿@model VMSingleBlog
+
+@if (Model.Comments != null)
+{
+    <div class="post-comments">
+        @if (ViewBag.lang == "az")
+        {
+            <h3>Rəylər</h3>
+        }
+        else if (ViewBag.lang == "ru")
+        {
+            <h3>
+                Комментарии
+            </h3>
+        }
+        else
+        {
+            <h3>
+                Comments
+            </h3>
+        }
+
+
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="single-comment">
+
+                <div class="comment-content">
+                    <h4>@comment.OwnerFullname</h4>
+                    <p>@comment.Text</p>
+                    <span>@comment.Date.ToString("MMM dd, yyyy - h:mm tt") @*19, 2018 - 9:10AM*@</span>
+                    @*<a href="#">Reply</a>*@
+                </div>
+            </div>
+        }
+
+
+
+
+        @*<div class="single-comment left-m">
+                <div class="comment-img">
+                    <img src="~/User/assets/img/team-image/2.jpg" alt="client">
+                </div>
+                <div class="comment-content">
+                    <h4>Doe John</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et minus, saepe porro a voluptatem, quidem aut libero consequatur unde molestiae quae impedit accusantium dolor est corporis! Dolores ut dignissimos doloribus?</p>
+                    <span>Jan 19, 2018 - 9:10AM</span>
+                    <a href="#">Reply</a>
+                </div>
+            </div>*@
+
+        @*<div class="single-comment">
+                <div class="comment-img">
+                    <img src="~/User/assets/img/team-image/3.jpg" alt="client">
+                </div>
+                <div class="comment-content">
+                    <h4>Steven Doe</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et minus, saepe porro a voluptatem, quidem aut libero consequatur unde molestiae quae impedit accusantium dolor est corporis! Dolores ut dignissimos doloribus?</p>
+                    <span>Jan 19, 2018 - 9:10AM</span>
+                    <a href="#">Reply</a>
+                </div>
+            </div>
+
+            <div class="single-comment">
+                <div class="comment-img">
+                    <img src="~/User/assets/img/team-image/5.jpg" alt="client">
+                </div>
+                <div class="comment-content">
+                    <h4>John Cina</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et minus, saepe porro a voluptatem, quidem aut libero consequatur unde molestiae quae impedit accusantium dolor est corporis! Dolores ut dignissimos doloribus?</p>
+                    <span>Jan 19, 2018 - 9:10AM</span>
+                    <a href="#">Reply</a>
+                </div>
+            </div>*@
+    </div>
+
+}
+
+<div class="leave-a-reply">
+    @if (ViewBag.lang == "az")
+    {
+        <h3>Rəy yazın</h3>
+    }
+    else if (ViewBag.lang == "ru")
+    {
+        <h3>Оставьте ответ</h3>
+    }
+    else
+    {
+        <h3>Leave a reply</h3>
+    }
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <input type="text" name="OwnerFullname" class="form-control" placeholder="Full Name">
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+                <input type="email" name="OwnerEmail" class="form-control" placeholder="E-Mail">
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+            <div class="form-group">
+                <textarea name="Text" cols="30" rows="5" class="form-control" placeholder="Your Comment"></textarea>
+            </div>
+        </div>
+        <input type="hidden" name="BlogID" value="@Model.Post.ID" />
+        <div class="col-lg-12 col-md-12">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </div>
+</div>

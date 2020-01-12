@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@model IEnumerable<Projects>
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    ViewData["Title"] = "Projects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Start Page Title -->
+<div class="page-title-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h2>@Localizer["projects"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape3"><img src="~/User/assets/img/shape3.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape5"><img src="~/User/assets/img/shape5.png" alt="shape"></div>
+    <div class="shape6 rotateme"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+</div>
+<!-- End Page Title -->
+<!-- Start Works Area -->
+<input type="hidden" id="projectCount" value="@ViewBag.TotalCount" />
+<section class="works-area ptb-80">
+    <div class="container">
+        <div class="row partialRow">
+            <partial name="_ProjectsPartial" model="Model" />
+        </div>
+        @if (ViewBag.TotalCount > 3)
+        {
+            <div class="row">
+                <button id="load_more_projects" class="btn btn-outline-primary w-50 mx-auto my-5">Load more</button>
+            </div>
+        }
+
+    </div>
+
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+</section>
+<!-- End Works Area -->

@@ -1,0 +1,28 @@
+﻿@model TechnicalGroup.Models.ProductCategory
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="kt_content" class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background:white !important">
+    <h3 class="text-center text-danger">Silmək istədiyinizdən əminsiniz mi ?</h3>
+    <hr />
+    <div class="container-fluid">
+        <div class="col-12">
+            <p><b>Kateqoriya adı (AZE)</b> - @Model.CategoryName_Az</p>
+        </div>
+        <div class="col-12">
+            <p><b>Kateqoriya adı (RUS)</b> - @Model.CategoryName_Ru </p>
+        </div>
+        <div class="col-12">
+            <p><b>Kateqoriya adı (ENG)</b> - @Model.CategoryName </p>
+        </div>
+    </div>
+    <hr />
+</div>
+<form asp-action="Delete" class="text-center">
+    <input type="hidden" asp-for="ID" />
+    <input type="submit" value="Sil" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-primary">Geriyə qayıt</a>
+</form>

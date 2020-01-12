@@ -1,0 +1,117 @@
+﻿@model TechnicalGroup.Models.Settings
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="fa fa-cog"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">
+                                Statik hissələr
+                            </h3>
+                        </div>
+                    </div>
+                    <form asp-action="Edit" enctype="multipart/form-data" class="kt-form kt-form--label-right" id="kt_form_1">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="ID" />
+                        <div class="kt-portlet__body">
+                            <div class="form-group row ">
+                                <label class="col-3 col-form-label">Loqo</label>
+                                <div class="col-9">
+                                    <input asp-for="SiteLogoImage" accept="image/*" class="form-control">
+                                    <span asp-validation-for="SiteLogoImage" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Hal-hazırki loqo:</label>
+                                <img src="~/images/@Model.SiteLogo" class="img-thumbnail img-shadow" style="display: block;" width="200" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">E-poçt:</label>
+                                <div class="col-9">
+                                    <input asp-for="ContactEmail" class="form-control">
+                                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Əlaqə nömrəsi:</label>
+                                <div class="col-9">
+                                    <input asp-for="ContactPhone" class="form-control">
+                                    <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Adres:</label>
+                                <div class="col-9">
+                                    <input asp-for="ContactAddress" class="form-control">
+                                    <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Haqqımızda (Azərbaycan dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="AboutDesc_Az" class="form-control">
+                                    <span asp-validation-for="AboutDesc_Az" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Haqqımızda (rus dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="AboutDesc_Ru" class="form-control">
+                                    <span asp-validation-for="AboutDesc_Ru" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Haqqımızda (ingilis dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="AboutDesc" class="form-control">
+                                    <span asp-validation-for="AboutDesc" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Pankart (Azərbaycan dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="MainBannerTitle_Az" class="form-control" >
+                                    <span asp-validation-for="MainBannerTitle_Az" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Pankart (rus dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="MainBannerTitle_Ru" class="form-control" >
+                                    <span asp-validation-for="MainBannerTitle_Ru" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Pankart (ingilis dilində):</label>
+                                <div class="col-9">
+                                    <input asp-for="MainBannerTitle" class="form-control" >
+                                    <span asp-validation-for="MainBannerTitle" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-5"></div>
+                                    <div class="col-lg-7">
+                                        <button type="submit" class="btn btn-brand">Redaktə et</button>
+                                        <button type="reset" class="btn btn-secondary">Ləğv elə</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

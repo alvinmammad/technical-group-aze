@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@model VMContact
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Page Title -->
+<div class="page-title-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <h2>@Localizer["contactus"]</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+    <div class="shape2 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    <div class="shape3"><img src="~/User/assets/img/shape3.svg" alt="shape"></div>
+    <div class="shape4"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape5"><img src="~/User/assets/img/shape5.png" alt="shape"></div>
+    <div class="shape6 rotateme"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape7"><img src="~/User/assets/img/shape4.svg" alt="shape"></div>
+    <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+</div>
+<!-- End Page Title -->
+<!-- Start Contact Info Area -->
+<section class="contact-info-area ptb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-info-box">
+                    <div class="icon">
+                        <i data-feather="mail"></i>
+                    </div>
+                    <h3>@Localizer["mailhere"]</h3>
+                    <p><a href="#">@Model.Settings.ContactEmail</a></p>
+                   
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-info-box">
+                    <div class="icon">
+                        <i data-feather="map-pin"></i>
+                    </div>
+                    <h3>@Localizer["visithere"]</h3>
+                    <p>@Model.Settings.ContactAddress</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3">
+                <div class="contact-info-box">
+                    <div class="icon">
+                        <i data-feather="phone"></i>
+                    </div>
+                    <h3>@Localizer["callhere"]</h3>
+                    <p><a href="#">@Model.Settings.ContactPhone</a></p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Contact Info Area -->
+<!-- Map -->
+<div id="map"></div>
+<!-- Start Contact Area -->
+<section class="contact-area ptb-80">
+    <div class="container">
+        <div class="section-title">
+            <h2>@Localizer["getintouchtitle"]</h2>
+            <div class="bar"></div>
+            <p>@Localizer["getintouchdesc"]</p>
+        </div>
+
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-lg-6 col-md-12">
+                <img src="~/User/assets/img/1.png" alt="image">
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <form id="message-contact" method="post" action="@Url.Action("Message")">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <input type="text" asp-for="@(Model.Name)" name="name" id="name" class="form-control"  data-error="Please enter your name" placeholder="@Localizer["messagename"]">
+                                @*<div class="help-block with-errors"></div>*@
+                            <span asp-validation-for="@(Model.Name)"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <input type="email" asp-for="@(Model.Email)" name="email" id="email" class="form-control"  data-error="Please enter your email" placeholder="@Localizer["messageemail"]">
+                                @*<div class="help-block with-errors"></div>*@
+                                <span asp-validation-for="@(Model.Email)"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-6">
+                            <div class="form-group">
+                                <input   asp-for="@(Model.Phone)" name="Phone" id="phone_number" required data-error="Please enter your number" class="form-control" placeholder="@Localizer["messagephone"]">
+                                <span asp-validation-for="@(Model.Phone)"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-6">
+                            <div class="form-group">
+                                <input type="text" asp-for="@(Model.Subject)" name="Subject" id="msg_subject" class="form-control"  data-error="Please enter your subject" placeholder="@Localizer["messagesubject"]">
+                                @*<div class="help-block with-errors"></div>*@
+                                <span asp-validation-for="@(Model.Subject)"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <textarea name="message" asp-for="@Model.Message" class="form-control" id="message" cols="30" rows="5" required data-error="Write your message" placeholder="@Localizer["yourmessage"]"></textarea>
+                                @*<div class="help-block with-errors"></div>*@
+                                <span asp-validation-for="@(Model.Message)"></span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <button type="submit" class="btn btn-primary">@Localizer["sendmessage"]</button>
+                            <div id="msgSubmit" class="h3 text-center hidden"></div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="forError">
+                            <p class="form-messages"></p>
+                        </div>
+                        @*@if (ViewBag.Error != null)
+                        {
+                            <h3>@ViewBag.Error</h3>
+                        }*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Contact Area -->

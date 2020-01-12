@@ -1,0 +1,47 @@
+﻿@model TechnicalGroup.Models.Projects
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="kt_content" class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background:white !important">
+    <h3 class="text-center text-danger">Silmək istədiyinizdən əminsiniz mi ?</h3>
+    <hr />
+    <div class="container-fluid">
+        <div class="col-12 image-col">
+            <ul>
+                <li>
+                    <b>Proyektin şəkli :</b>
+                </li>
+                <li>
+                    <img class="img-thumbnail img-shadow" src="~/images/Projects/@(Model.ProjectPhotos.FirstOrDefault()!=null?Model.ProjectPhotos.FirstOrDefault().Photo:"")" style="width:250px" />
+                </li>
+            </ul>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (AZE)</b> - @Model.LittleContent_Az</p>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (RUS)</b> - @Model.LittleContent_Ru</p>
+        </div>
+        <div class="col-12">
+            <p><b>Kiçik məzmun (ENG)</b> - @Model.LittleContent</p>
+        </div>
+        <div class="col-12">
+            <p><b>Proyekt haqqında ətraflı(AZE)</b> - @Model.Description_Az</p>
+        </div>
+        <div class="col-12">
+            <p><b>Proyekt haqqında ətraflı(RUS)</b> - @Model.Description_Ru</p>
+        </div>
+        <div class="col-12">
+            <p><b>Proyekt haqqında ətraflı(ENG)</b> - @Model.Description</p>
+        </div>
+    </div>
+    <hr />
+</div>
+<form asp-action="Delete" class="text-center">
+    <input type="hidden" asp-for="ID" />
+    <input type="submit" value="Sil" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-primary">Geriyə qayıt</a>
+</form>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Projects>
+
+@foreach (var project in Model)
+{
+    <div class="col-lg-4 col-md-6">
+        <div class="single-works">
+            @if (project.ProjectPhotos != null && project.ProjectPhotos.Count > 0)
+            {
+                <img src="~/images/Projects/@(project.ProjectPhotos.FirstOrDefault()!=null?project.ProjectPhotos.FirstOrDefault().Photo:"")" alt="@project.LittleContent_Az">
+            }
+
+            <div class="works-content">
+                <h3>
+                    <a asp-controller="Home" asp-action="ProjectDetail" asp-route-id="@project.ID">
+                        @if (ViewBag.lang == "az")
+                        {
+                            @project.LittleContent_Az
+                        }
+                        else if (ViewBag.lang == "ru")
+                        {
+                            @project.LittleContent_Ru
+                        }
+                        else
+                        {
+                            @project.LittleContent
+                        }
+                    </a>
+                </h3>
+                <p>
+                    @if (ViewBag.lang == "az")
+                    {
+                        @Html.Raw(project.Description_Az)
+                    }
+                    else if (ViewBag.lang == "ru")
+                    {
+                        @Html.Raw(project.Description_Ru)
+                    }
+                    else
+                    {
+                        @Html.Raw(project.Description)
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+
+}
+

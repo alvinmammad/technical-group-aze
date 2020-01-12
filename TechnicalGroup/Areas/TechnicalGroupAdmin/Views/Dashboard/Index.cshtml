@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+@using Microsoft.AspNetCore.Http;
+<form asp-controller="Account" asp-action="Logout"
+      method="post">
+    <input type="submit" value="Çıxış et" />
+</form>

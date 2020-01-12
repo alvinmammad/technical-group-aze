@@ -1,0 +1,180 @@
+﻿@model TechnicalGroup.Models.Products
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/TechnicalGroupAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon">
+                            <i class="kt-font-brand flaticon2-information"></i>
+                        </span>
+                        <h3 class="kt-portlet__head-title">
+                            Məhsullar
+                        </h3>
+                    </div>
+                </div>
+                <form asp-action="Add" asp-controller="Products" class="kt-form kt-form--label-right" id="kt_form_1" novalidate="novalidate" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="kt-portlet__body">
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsulun adı</label>
+                            <div class="col-9">
+                                <input asp-for="Name" class="form-control" placeholder="Məhsulun adı">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <label class="col-3 col-form-label">Kiçik məlumat (AZE):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Info_Az" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Info_Az" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Kiçik məlumat (RUS):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Info_Ru" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Info_Ru" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Kiçik məlumat (ENG):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Info" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Info" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsul haqqında (AZE):</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description_Az" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description_Az" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsul haqqında (RUS)</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description_Ru" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description_Ru" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsul haqqında (ENG)</label>
+                            <div class="col-9">
+                                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsul aktivdirmi ?</label>
+                            <div class="col-9">
+                                <input asp-for="IsActive" class="form-control">
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsulun kateqoriyası:</label>
+                            <div class="col-9">
+                                <select asp-for="ProductCategoryID" class="form-control" asp-items="ViewBag.ProductCategoryID"></select>
+                                <span asp-validation-for="ProductCategoryID" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsulun qiyməti :</label>
+                            <div class="col-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="input-group-text">₼</span>
+                                    </span>
+                                    <input asp-for="Price" class="form-control" placeholder="Məhsulun qiyməti">
+                                </div>
+                               
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsulun endirimi (əgər varsa daxil edin) :</label>
+                            <div class="col-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="input-group-text">%</span>
+                                    </span>
+                                    <input asp-for="Discount" class="form-control" placeholder="Məhsulun endirimi">
+                                </div>
+                               
+                                <span asp-validation-for="Discount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Məhsulun şəkli:</label>
+                            <div class="col-9">
+                                <div class="custom-file">
+                                    <input class="form-control" multiple type="file" id="Photo" name="Photo" value="" />
+
+                                    @*<input asp-for="Photo" accept="image/*" multiple class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile"></label>*@
+                                    <span asp-validation-for="PhotoNames" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <select name="PhotoNames" multiple style="display:none;">
+
+                        </select>
+
+                        <div class="form-group row">
+                            <ul class="d-flex photos">
+                            </ul>
+                        </div>
+
+                        <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg kt-separator--portlet-fit"></div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-5"></div>
+                                <div class="col-lg-7">
+                                    <button type="submit" class="btn btn-brand">Yarat</button>
+                                    <button type="reset" class="btn btn-secondary">Ləğv elə</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description_Az'));
+        ClassicEditor
+            .create(document.querySelector('#Description_Ru'))
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+          ClassicEditor
+            .create(document.querySelector('#Info_Az'));
+        ClassicEditor
+            .create(document.querySelector('#Info_Ru'))
+        ClassicEditor
+            .create(document.querySelector('#Info'))
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+}

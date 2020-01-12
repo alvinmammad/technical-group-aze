@@ -1,0 +1,214 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Http.Extensions
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap Min CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/bootstrap.min.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/animate.css">
+    <!-- Meanmenu Min CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/meanmenu.css">
+    <!-- Magnific Popup Min CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/magnific-popup.min.css">
+    <!-- Owl Carousel Min CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/owl.carousel.min.css">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/flaticon.css">
+    <!-- Odometer CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/odometer.css">
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/slick.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/User/assets/css/responsive.css">
+
+    <title>Technical Group AZE</title>
+
+    <link rel="icon" type="image/png" href="~/images/Statics/sitelogo.jpeg">
+    @*@if (ViewBag.Meta != null)
+    {
+        Meta meta = ViewBag.Meta as Meta;
+
+        <meta property="og:type" content="@meta.Type" />
+        <meta property="og:url" content="@Context.Request.GetDisplayUrl()" />
+        <meta property="og:title" content="@meta.Name" />
+        <meta property="og:description" content="@meta.Desc" />
+        <meta property="og:site_name" content="technicalgroup.az" />
+        <meta property="og:image" content="@meta.Image" />
+    }*@
+</head>
+
+<body>
+    <!-- Start Preloader Area -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+    <!-- End Preloader Area -->
+    <!-- Start Navbar Area -->
+    <header id="header">
+
+        @{
+            var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+            var cultureItems = LocOptions.Value.SupportedUICultures
+                .Select(c => new SelectListItem { Value = c.Name, Text = c.Name.ToUpper() })
+                .ToList();
+            var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+        }
+
+        <div class="startp-mobile-nav">
+            <div class="logo">
+                <a asp-controller="Home" asp-action="Index"><img src="~/images/Statics/sitelogo.jpeg" alt="logo" style="width:94px;"></a>
+            </div>
+        </div>
+        <div class="woocommerce-topbar-ordering" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+            
+        </div>
+        <div class="startp-nav">
+            <div class="container">
+                <nav class="navbar navbar-expand-md navbar-light">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/images/Statics/sitelogo.jpeg" alt="logo" style="width:100px"></a>
+
+
+                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav nav ml-auto">
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="Products" class="nav-link">@Localizer["products"]</a></li>
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="Projects" class="nav-link">@Localizer["ourprojects"]</a></li>
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="Blog" class="nav-link">@Localizer["blogs"]</a></li>
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="Services" class="nav-link">@Localizer["services"]</a></li>
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link">@Localizer["about"]</a></li>
+
+                            <li class="nav-item"><a asp-controller="Home" asp-action="Contact" class="nav-link">@Localizer["contact"]</a></li>
+                            <li class="nav-item">
+
+                                <div class="woocommerce-topbar-ordering" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+                                    <form id="selectLanguage" asp-controller="Home"
+                                          asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
+                                          method="post" class="form-horizontal" role="form">
+                                        <select class="form-control" name="culture" onchange="this.form.submit();" style="position:relative;bottom:12px;background:transparent;border:none;"
+                                                asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+                                        </select>
+                                    </form>
+                                </div>
+
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </nav>
+
+            </div>
+        </div>
+    </header>
+   
+    @RenderBody()
+    <footer class="footer-area bg-f7fafd">
+        <div class="container">
+            <div class="row">                
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-footer-widget pl-5">
+                        <h3>Technical Group</h3>
+                        <ul class="list">
+                            <li><a asp-controller="home" asp-action="about">@Localizer["about"]</a></li>
+                            <li><a asp-controller="home" asp-action="services">@Localizer["services"]</a></li>
+                            <li><a asp-controller="home" asp-action="blog">@Localizer["blogs"]</a></li>
+                            <li><a asp-controller="home" asp-action="projects">@Localizer["ourprojects"]</a></li>
+                            <li><a asp-controller="home" asp-action="products">@Localizer["products"]</a></li>
+                            <li><a asp-controller="home" asp-action="contact">@Localizer["contact"]</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-footer-widget">
+                        <h3>Address</h3>
+
+                        <ul class="footer-contact-info">
+                            <li><i data-feather="map-pin"></i> Bakı ,Ələsgər Qayıbov küçəsi 12/22</li>
+                            <li><i data-feather="mail"></i> Email: <a href="#">info@technicalgroup.az</a></li>
+                            <li><i data-feather="phone-call"></i> Phone: <a href="#">+ 994515838685</a></li>
+                        </ul>
+                        <ul class="social-links">
+                            <li><a href="https://www.facebook.com" class="facebook"><i data-feather="facebook"></i></a></li>
+                            <li><a href="https://www.twitter.com" class="twitter"><i data-feather="twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/technicalgroup.az/" class="instagram"><i data-feather="instagram"></i></a></li>
+                            <li><a href="https://www.linkedin.com" class="linkedin"><i data-feather="linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12">
+                    <div class="copyright-area">
+                        <p>Copyright @@2019 Technical Group AZE . Bütün hüqüqlar qorunur .</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img src="~/User/assets/img/map.png" class="map" alt="map">
+        <div class="shape1"><img src="~/User/assets/img/shape1.png" alt="shape"></div>
+        <div class="shape8 rotateme"><img src="~/User/assets/img/shape2.svg" alt="shape"></div>
+    </footer>
+    <!-- End Footer Area -->
+
+    <div class="go-top"><i data-feather="arrow-up"></i></div>
+
+    <!-- Jquery Min JS -->
+    <script src="~/User/assets/js/jquery.min.js"></script>
+    <!-- Popper Min JS -->
+    <script src="~/User/assets/js/popper.min.js"></script>
+    <!-- Bootstrap Min JS -->
+    <script src="~/User/assets/js/bootstrap.min.js"></script>
+    <!-- Meanmenu Min JS -->
+    <script src="~/User/assets/js/jquery.meanmenu.min.js"></script>
+    <!-- WOW Min JS -->
+    <script src="~/User/assets/js/wow.min.js"></script>
+    <!-- Magnific Popup Min JS -->
+    <script src="~/User/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Appear Min JS -->
+    <script src="~/User/assets/js/jquery.appear.js"></script>
+    <!-- Odometer Min JS -->
+    <script src="~/User/assets/js/odometer.min.js"></script>
+    <!-- Slick Min JS -->
+    <script src="~/User/assets/js/slick.js"></script>
+    <!-- Owl Carousel Min JS -->
+    <script src="~/User/assets/js/owl.carousel.min.js"></script>
+    <!-- Feather Icon Min JS -->
+    <script src="~/User/assets/js/feather.min.js"></script>
+    <!-- Form Validator Min JS -->
+    <script src="~/User/assets/js/form-validator.min.js"></script>
+    <!-- Contact Form Min JS -->
+    <script src="~/User/assets/js/contact-form-script.js"></script>
+    <!-- Map API JS FILES -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApghCIIx9MpQhA768sKXxvR_Okg0SF2k4&amp;callback=initMap"></script>
+    <!-- StartP Map JS FILE -->
+    <script src="~/User/assets/js/startp-map.js"></script>
+    <!-- Main JS -->
+    <script src="~/User/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
